@@ -1,4 +1,4 @@
 <?php
-    include "/New folder/htdocs/samonline/Connect/connect.php";
-    include "/New folder/htdocs/samonline/Json/json.php"
+    include "/xampp/htdocs/samonline/Connect/connect.php";
+    include "/xampp/htdocs/samonline/Json/json.php"
 ?>
