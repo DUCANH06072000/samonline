@@ -16,13 +16,13 @@
                 $queryClass = $connection->query($get_class);
                   while($rowClass = mysqli_fetch_assoc($queryClass)){
                      $nameClass = $rowClass['nameClass'];
+                     $get_Faculty = "SELECT * FROM Faculty WHERE idFaculty = '".$rowClass['idFaculty']."'";
+                     $queryFaculty = $connection->query($get_Faculty);
+                     while($rowFaculty = mysqli_fetch_assoc($queryFaculty)){
+                       $nameFaculty = $rowFaculty['nameFaculty'];
+                    } 
                   } 
-                  $get_Faculty = "SELECT * FROM Faculty WHERE idFaculty = '".$row['idFaculty']."'";
-                  $queryFaculty = $connection->query($get_Faculty);
-                  while($rowFaculty = mysqli_fetch_assoc($queryFaculty)){
-                    $nameFaculty = $rowFaculty['nameFaculty'];
-                 } 
-
+                 
                     while($rowClass = mysqli_fetch_assoc($queryClass)){
                        $nameClass = $rowClass['nameClass'];
                     } 
