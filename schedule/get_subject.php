@@ -10,11 +10,21 @@
             $query_nameSubject = $connection->query($get_nameSubject);
             while($rowNameSubject = mysqli_fetch_assoc($query_nameSubject)){
                 $nameSubject = $rowNameSubject['nameSubject'];
+                $idTeacher = $rowNameSubject['idTeacher'];
+                $number = $rowNameSubject['number'];
             }
+            
+            $get_nameTeacher = "SELECT * FROM teacher WHERE idTeacher = '".$idTeacher."'";
+            $query_nameTeacher = $connection->query($get_nameTeacher);
+            while($rowTeacher = mysqli_fetch_assoc($query_nameTeacher)){
+                $nameTeacher = $rowTeacher['nameTeacher'];
+            }
+            
             $list = array(
                 'nameSubject'=>$nameSubject,
                 'dateTime'=>$rowSubject['dateTime'],
-                'teacher' =>$rowSubject['teacher'],
+                'nameTeacher' =>$nameTeacher,
+                'number'=>$number,
             );
             $listSubject[] = $list;
         }
