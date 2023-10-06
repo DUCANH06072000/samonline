@@ -1,17 +1,15 @@
 <?php
-    include "connect.php";
+      include "connect.php";
+    $codeStudent = $_POST['codeStudent'];
+    $address = $_POST['address'];
+    $birthday = $_POST['birthday'];
 
-    // Check if the 'codeStudent' and 'passWord' keys are set in the $_POST array
-    if (isset($_POST['codeStudent']) && isset($_POST['passWord'])) {
-        $codeStudent = $_POST['codeStudent'];
-        $passWord = $_POST['passWord'];
-    
-        $login = "SELECT * FROM user WHERE codeStudent = '".$codeStudent."' AND passWord = '".$passWord."'";
-        $queryLogin = $connection->query($login);
-        
-        if(mysqli_num_rows($queryLogin) > 0){
-            while($row = mysqli_fetch_assoc($queryLogin)){
-
+    $checkUser = "SELECT * FROM user WHERE codeStudent = '".$codeStudent."'";
+    $queryCheckUser = $connection->query($checkUser);
+    if(mysqli_num_rows($queryCheckUser)>0){
+        $updateUser = "UPDATE user SET address = '".$address."', birthday  = '".$birthday."' WHERE codeStudent = '".$codeStudent."'";
+        $queryUpdateUser = $connection->query($updateUser);
+            while($row = mysqli_fetch_assoc($queryCheckUser)){
                 $get_class = "SELECT * FROM class WHERE idClass = '".$row['idClass']."'";
                 $queryClass = $connection->query($get_class);
                   while($rowClass = mysqli_fetch_assoc($queryClass)){
@@ -22,7 +20,6 @@
                        $nameFaculty = $rowFaculty['nameFaculty'];
                     } 
                   } 
-                 
                     while($rowClass = mysqli_fetch_assoc($queryClass)){
                        $nameClass = $rowClass['nameClass'];
                     } 
@@ -33,8 +30,8 @@
                     "nameClass" => $nameClass,
                     "image"=>$row['image'],
                     "passWord"=>$row['passWord'],
-                    "address"=>$row['address'],
-                    "birthday"=>$row['birthday']
+                    "address"=>$address,
+                    "birthday"=>$birthday
                          );
               
             }
@@ -44,23 +41,14 @@
                 'message' => "Thành công",
                 'data' => [json_decode($jsonList)],
             );
+
             verifyJson($json, 200);
-        } else {
-            $json = array(
-                'statusCode' => 412,
-                'message' => "Đăng nhập sai thông tin",
-                'data' => [],
-            );
-            verifyJson($json, 412);
-        }
-    } else {
-        // If 'codeStudent' or 'passWord' is missing in the request, return an error response
+    }else{
         $json = array(
             'statusCode' => 400,
-            'message' => "Thông tin tài khoản không chính xác",
+            'message' => "Mã sinh viên không chính xác",
             'data' => [],
         );
         verifyJson($json, 400);
     }
-
 ?>

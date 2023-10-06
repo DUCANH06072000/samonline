@@ -13,7 +13,7 @@
             'message' => "Đổi mật khẩu thành công",
             'data' => [],
         );
-        verifyJson($json, 200);
+        verifyJson($json, 200);   
     }else{
         $json = array(
             'statusCode' => 412,

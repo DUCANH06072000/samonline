@@ -12,6 +12,8 @@
                 $nameSubject = $rowNameSubject['nameSubject'];
                 $idTeacher = $rowNameSubject['idTeacher'];
                 $number = $rowNameSubject['number'];
+                $startDate = $rowSubject['startDate'];
+                $endDate = $rowSubject['endDate'];
             }
             
             $get_nameTeacher = "SELECT * FROM teacher WHERE idTeacher = '".$idTeacher."'";
@@ -25,6 +27,8 @@
                 'dateTime'=>$rowSubject['dateTime'],
                 'nameTeacher' =>$nameTeacher,
                 'number'=>$number,
+                'startDay'=>$startDate,
+                'endDay'=>$endDate
             );
             $listSubject[] = $list;
         }
